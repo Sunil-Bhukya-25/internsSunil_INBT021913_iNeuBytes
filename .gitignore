@@ -21,3 +21,6 @@ FINAL_SUBMISSION/
 .idea/
 .DS_Store
 Thumbs.db
+
+# Final submission archive
+!Personalized_Chatbot_Final_Submission_NEW.zip
