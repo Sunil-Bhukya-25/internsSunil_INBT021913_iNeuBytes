@@ -1,317 +1,416 @@
-# Personalized Chatbot
+# \# Personalized Chatbot
 
-A hybrid retrieval-based chatbot that combines TF-IDF lexical retrieval with MiniLM semantic retrieval. The application uses a Flask backend and a browser-based HTML/CSS/JavaScript frontend.
+# 
 
-## 1. Project Overview
+# A hybrid retrieval-based chatbot developed as an internship project. The system combines TF-IDF lexical retrieval with MiniLM semantic retrieval to find relevant responses from a question-response knowledge base.
 
-The chatbot searches a question–answer knowledge base and returns a stored response when the retrieved result is sufficiently relevant.
+# 
 
-Final configuration:
+# \## Project Repository
 
-| Item | Value |
-|---|---|
-| Retrieval model | Hybrid TF-IDF + MiniLM |
-| TF-IDF weight | 0.3 |
-| MiniLM weight | 0.7 |
-| MiniLM embedding size | 384 |
-| Candidate count | 100 |
-| Knowledge-base examples | 276,753 |
-| Backend | Python Flask |
-| Frontend | HTML, CSS, JavaScript |
-| API testing | Postman |
-| Inference | CPU supported |
+# 
 
-The hybrid score is:
+# GitHub:
 
-`Hybrid Score = (0.3 × TF-IDF Score) + (0.7 × MiniLM Score)`
+# https://github.com/Sunil-Bhukya-25/internsSunil\_INBT021913\_iNeuBytes
 
-The system also performs a confidence check. If both the semantic and lexical evidence are weak, it returns a safe fallback instead of an unrelated stored response.
+# 
 
-## 2. Dataset
+# \## Features
 
-### Dataset used
+# 
 
-The project was developed using the **Ubuntu Dialogue Corpus** as the source conversational dataset.
+# \- Hybrid TF-IDF + MiniLM retrieval
 
-Official dataset information:
-https://www.i2c2.aut.ac.nz/ubuntu-corpus/
+# \- Semantic similarity using MiniLM embeddings
 
-The project preprocessing pipeline converted the source conversations into the question–response knowledge base used by the retrieval system.
+# \- Keyword matching using TF-IDF
 
-Final processed knowledge base:
+# \- Confidence-based fallback for weak matches
 
-- 276,753 training examples
-- Stored question/response pairs
-- TF-IDF representation for lexical retrieval
-- MiniLM embeddings for semantic retrieval
+# \- Flask backend
 
-### Data processing
+# \- HTML/CSS/JavaScript frontend
 
-```text
-Ubuntu Dialogue Corpus
-        ↓
-Question / Response extraction
-        ↓
-Text processing
-        ↓
-TF-IDF + MiniLM embeddings
-        ↓
-Aligned retrieval artifacts
-        ↓
-Hybrid chatbot
-```
+# \- REST API
 
-## 3. Model / Retrieval Artifacts
+# \- CPU-based inference support
 
-This project does not use a single generative LLM checkpoint. The deployed retrieval system uses indexed artifacts:
+# 
 
-```text
-models/
-├── tfidf_vectorizer.pkl
-├── tfidf_train_matrix.npz
-├── semantic_train_embeddings_fixed.npy
-├── semantic_train_indices_fixed.npy
-├── semantic_train_responses_fixed.json
-└── semantic_embedding_config_fixed.json
-```
+# \## Technologies Used
 
-The local model artifacts are large and are intentionally not stored in the GitHub source repository.
+# 
 
-### Model artifact repository
+# \- Python
 
-The project model artifacts were uploaded to the Hugging Face Dataset repository:
+# \- Flask
 
-`Sunil-25-10/personalized-chatbot-models`
+# \- HTML
 
-Before using the clean-clone instructions below, make sure this Hugging Face repository is accessible to the evaluator. For a no-login clean-clone workflow, make the model repository **public**.
+# \- CSS
 
-If the repository remains private, a Hugging Face access token with read permission is required.
+# \- JavaScript
 
-## 4. Clean Clone Setup
+# \- scikit-learn
 
-### Step 1 — Clone the GitHub repository
+# \- TF-IDF
 
-```bash
-git clone https://github.com/Sunil-Bhukya-25/Personalized-Chatbot.git
-cd Personalized-Chatbot
-```
+# \- PyTorch
 
-### Step 2 — Create a virtual environment
+# \- Sentence Transformers
 
-Windows:
+# \- MiniLM
 
-```bash
-python -m venv venv
-venv\Scripts\activate
-```
+# \- NumPy
 
-Linux/macOS:
+# \- SciPy
 
-```bash
-python3 -m venv venv
-source venv/bin/activate
-```
+# \- Joblib
 
-### Step 3 — Install dependencies
+# 
 
-```bash
-pip install -r requirements.txt
-```
+# \## System Architecture
 
-### Step 4 — Download the retrieval artifacts
+# 
 
-Run:
+# User
 
-```bash
-python download_models.py
-```
+# &#x20; ↓
 
-The script downloads the six required retrieval artifacts into:
+# Web Frontend
 
-```text
-models/
-```
+# &#x20; ↓
 
-If the Hugging Face repository is private, authenticate first using a Hugging Face token with read access.
+# Flask Backend
 
-### Step 5 — Start the application
+# &#x20; ↓
 
-```bash
-python app.py
-```
+# TF-IDF Retrieval + MiniLM Semantic Retrieval
 
-Open:
+# &#x20; ↓
 
-```text
-http://127.0.0.1:5000
-```
+# Hybrid Score
 
-## 5. Manual Model Loading Option
+# &#x20; ↓
 
-If automatic download is not available, obtain these six files from the project's model-artifact repository and place them directly inside `models/`:
+# Confidence Check
 
-```text
-tfidf_vectorizer.pkl
-tfidf_train_matrix.npz
-semantic_train_embeddings_fixed.npy
-semantic_train_indices_fixed.npy
-semantic_train_responses_fixed.json
-semantic_embedding_config_fixed.json
-```
+# &#x20; ↓
 
-The Flask application checks for the required files during startup.
+# Response / Fallback
 
-## 6. Requirements
+# 
 
-Install:
+# \## Retrieval Method
 
-```bash
-pip install -r requirements.txt
-```
+# 
 
-Main libraries:
+# Hybrid Score = (0.3 × TF-IDF Score) + (0.7 × MiniLM Semantic Score)
 
-- Flask
-- flask-cors
-- NumPy
-- SciPy
-- scikit-learn
-- joblib
-- PyTorch
-- sentence-transformers
-- huggingface_hub
-- gunicorn
+# 
 
-## 7. How the System Works
+# TF-IDF provides lexical/keyword matching, while MiniLM provides semantic similarity between differently worded queries.
 
-```text
-User
-  ↓
-Browser Chat Interface
-  ↓
-Flask API
-  ↓
-Retrieve candidates
-  ↓
-TF-IDF score + MiniLM semantic score
-  ↓
-Normalize and combine scores
-  ↓
-Hybrid ranking
-  ↓
-Confidence check
-  ├── Sufficient confidence → stored response
-  └── Low confidence → fallback message
-```
+# 
 
-TF-IDF provides lexical/keyword matching. MiniLM provides semantic similarity so that differently worded questions can still be related.
+# \## Model Configuration
 
-## 8. Confidence / Fallback
+# 
 
-The system checks the original semantic and lexical similarity values rather than relying only on the normalized hybrid score.
+# \- TF-IDF weight: 0.3
 
-If both are below their configured fallback thresholds, the system returns:
+# \- MiniLM weight: 0.7
 
-> Sorry, I couldn't find a sufficiently relevant answer to that question in my knowledge base. Please try asking about one of the topics supported by the chatbot.
+# \- MiniLM embedding dimension: 384
 
-This prevents a weak nearest result from being presented as a confident answer.
+# \- Knowledge-base examples: 276,753
 
-## 9. API
+# \- Retrieval candidate count: 100
 
-Example request:
+# \- Inference device: CPU
 
-```http
-POST /respond
-Content-Type: application/json
-```
+# 
 
-```json
-{
-  "message": "What is solar energy?"
-}
-```
+# \## Confidence and Fallback
 
-The API returns the selected response together with retrieval information such as model, scores, confidence status, and retrieval time.
+# 
 
-Health check:
+# The chatbot checks whether the retrieved result is sufficiently relevant.
 
-```http
-GET /
-```
+# 
 
-## 10. Postman Testing
+# If the retrieved result has insufficient confidence, the system does not return a potentially unrelated answer. Instead, it returns a fallback response explaining that a sufficiently relevant answer could not be found.
 
-Postman was used to test the Flask API independently of the browser interface.
+# 
 
-The project includes Postman testing material in:
+# The API also validates user input.
 
-```text
-postman/
-```
+# 
 
-The health check was successfully verified with HTTP 200 OK.
+# Examples:
 
-## 11. Validation
+# 
 
-Final retrieval validation:
+# Missing message:
 
-- Relevant questions matched: **6/6**
-- Problematic questions rejected: **4/4**
+# The 'message' field must be a string.
 
-The project was also verified through:
+# 
 
-- Local Flask execution
-- Browser chatbot testing
-- Postman API testing
-- Confidence/fallback demonstration
-- GitHub repository verification
+# Empty message:
 
-## 12. Deployment
+# message cannot be empty.
 
-The application was successfully demonstrated publicly using a Cloudflare Quick Tunnel connected to the local Flask server.
+# 
 
-Important: the Quick Tunnel is a temporary demonstration method. It depends on the local Flask server and tunnel process remaining active and is not the permanent production deployment.
+# Whitespace-only message:
 
-## 13. Project Structure
+# message cannot be empty.
 
-```text
-Personalized-Chatbot/
-├── app.py
-├── requirements.txt
-├── Dockerfile
-├── README.md
-├── download_models.py
-├── static/
-│   ├── script.js
-│   └── style.css
-├── templates/
-│   └── index.html
-├── postman/
-└── reports/
-```
+# 
 
-## 14. Large Model Files
+# \## API
 
-The retrieval artifacts are intentionally excluded from GitHub because of their large size.
+# 
 
-This separation keeps the source repository manageable while allowing the model artifacts to be obtained separately.
+# The main chatbot endpoint is:
 
-The exact required files are documented in:
+# 
 
-```text
-MODEL_MANIFEST.txt
-```
+# POST /chat
 
-## 15. Project Repository
+# 
 
-GitHub:
+# Example request:
 
-https://github.com/Sunil-Bhukya-25/Personalized-Chatbot
+# 
 
-Model artifacts:
+# {
 
-`Sunil-25-10/personalized-chatbot-models`
+# &#x20; "message": "What is solar energy?"
 
-## 16. Author
+# }
 
-Sunil Bhukya
+# 
+
+# \## Running the Project
+
+# 
+
+# \### 1. Clone the repository
+
+# 
+
+# git clone https://github.com/Sunil-Bhukya-25/internsSunil\_INBT021913\_iNeuBytes.git
+
+# 
+
+# cd internsSunil\_INBT021913\_iNeuBytes
+
+# 
+
+# \### 2. Create a virtual environment
+
+# 
+
+# Windows:
+
+# 
+
+# python -m venv venv
+
+# 
+
+# venv\\Scripts\\activate
+
+# 
+
+# \### 3. Install dependencies
+
+# 
+
+# pip install -r requirements.txt
+
+# 
+
+# \### 4. Obtain model artifacts
+
+# 
+
+# The trained retrieval artifacts are large and are intentionally excluded from GitHub.
+
+# 
+
+# The required model files are documented in:
+
+# 
+
+# MODEL\_MANIFEST.txt
+
+# 
+
+# The helper script is:
+
+# 
+
+# download\_models.py
+
+# 
+
+# Run:
+
+# 
+
+# python download\_models.py
+
+# 
+
+# If the configured model repository requires authentication, the appropriate Hugging Face access must be provided.
+
+# 
+
+# \### 5. Start the Flask application
+
+# 
+
+# python app.py
+
+# 
+
+# Open:
+
+# 
+
+# http://127.0.0.1:5000
+
+# 
+
+# \## Project Structure
+
+# 
+
+# internsSunil\_INBT021913\_iNeuBytes/
+
+# │
+
+# ├── app.py
+
+# ├── requirements.txt
+
+# ├── README.md
+
+# ├── .gitignore
+
+# ├── download\_models.py
+
+# ├── MODEL\_MANIFEST.txt
+
+# │
+
+# ├── static/
+
+# │   ├── script.js
+
+# │   └── style.css
+
+# │
+
+# └── templates/
+
+# &#x20;   └── index.html
+
+# 
+
+# \## Model Files
+
+# 
+
+# The following retrieval artifacts are required by the final application:
+
+# 
+
+# tfidf\_vectorizer.pkl
+
+# tfidf\_train\_matrix.npz
+
+# semantic\_train\_embeddings\_fixed.npy
+
+# semantic\_train\_indices\_fixed.npy
+
+# semantic\_train\_responses\_fixed.json
+
+# semantic\_embedding\_config\_fixed.json
+
+# 
+
+# These files are excluded from GitHub because of their large size.
+
+# 
+
+# \## Validation
+
+# 
+
+# The final system was tested for:
+
+# 
+
+# \- Normal chatbot questions
+
+# \- Relevant response retrieval
+
+# \- Low-confidence / unsupported questions
+
+# \- Empty input
+
+# \- Whitespace-only input
+
+# \- Missing message field
+
+# \- Flask server operation
+
+# \- API operation
+
+# \- Postman API testing
+
+# 
+
+# Final retrieval validation:
+
+# 
+
+# Relevant questions: 6/6
+
+# 
+
+# Problematic questions rejected: 4/4
+
+# 
+
+# \## Internship Project
+
+# 
+
+# Repository naming follows the required internship format:
+
+# 
+
+# interns\[FirstName]\_RegdNo\_iNeuBytes
+
+# 
+
+# Final repository:
+
+# 
+
+# internsSunil\_INBT021913\_iNeuBytes
+
+# 
+
+# \## Author
+
+# 
+
+# Sunil Bhukya
+
