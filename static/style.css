@@ -1,0 +1,326 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: #eef2f7;
+}
+
+.app {
+    width: 100%;
+    max-width: 900px;
+    height: 90vh;
+
+    display: flex;
+    flex-direction: column;
+
+    background: white;
+
+    border-radius: 18px;
+    overflow: hidden;
+
+    box-shadow:
+        0 15px 45px rgba(0, 0, 0, 0.12);
+}
+
+
+/* =========================
+   HEADER
+   ========================= */
+
+.chat-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+
+    padding: 20px 24px;
+
+    background: #1f2937;
+    color: white;
+}
+
+.bot-icon {
+    width: 50px;
+    height: 50px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: white;
+    border-radius: 50%;
+
+    font-size: 25px;
+}
+
+.chat-header h1 {
+    font-size: 21px;
+    margin-bottom: 5px;
+}
+
+.chat-header p {
+    font-size: 13px;
+    opacity: 0.85;
+}
+
+.status-dot {
+    display: inline-block;
+
+    width: 8px;
+    height: 8px;
+
+    margin-right: 5px;
+
+    background: #22c55e;
+    border-radius: 50%;
+}
+
+
+/* =========================
+   CHAT AREA
+   ========================= */
+
+.chat-box {
+    flex: 1;
+
+    padding: 25px;
+
+    overflow-y: auto;
+
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+
+    background: #f8fafc;
+}
+
+
+/* =========================
+   MESSAGES
+   ========================= */
+
+.message {
+    display: flex;
+    align-items: flex-start;
+
+    gap: 10px;
+
+    max-width: 80%;
+}
+
+.bot-message {
+    align-self: flex-start;
+}
+
+.user-message {
+    align-self: flex-end;
+    flex-direction: row-reverse;
+}
+
+.avatar {
+    width: 36px;
+    height: 36px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: white;
+
+    border-radius: 50%;
+
+    box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.bubble {
+    padding: 12px 16px;
+
+    line-height: 1.5;
+
+    border-radius: 15px;
+
+    font-size: 15px;
+
+    white-space: pre-wrap;
+}
+
+.bot-message .bubble {
+    background: white;
+    color: #1f2937;
+
+    border-top-left-radius: 4px;
+
+    box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.user-message .bubble {
+    background: #2563eb;
+    color: white;
+
+    border-top-right-radius: 4px;
+}
+
+
+/* =========================
+   TYPING INDICATOR
+   ========================= */
+
+.typing {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+
+    padding: 8px 24px;
+
+    background: #f8fafc;
+
+    color: #64748b;
+
+    font-size: 13px;
+}
+
+.typing span {
+    width: 6px;
+    height: 6px;
+
+    background: #64748b;
+
+    border-radius: 50%;
+
+    animation: bounce 1.2s infinite;
+}
+
+.typing span:nth-child(2) {
+    animation-delay: 0.15s;
+}
+
+.typing span:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+.typing label {
+    margin-left: 5px;
+}
+
+.hidden {
+    display: none;
+}
+
+@keyframes bounce {
+    0%, 60%, 100% {
+        transform: translateY(0);
+    }
+
+    30% {
+        transform: translateY(-5px);
+    }
+}
+
+
+/* =========================
+   INPUT
+   ========================= */
+
+.input-area {
+    display: flex;
+    gap: 10px;
+
+    padding: 18px;
+
+    background: white;
+
+    border-top: 1px solid #e5e7eb;
+}
+
+#message-input {
+    flex: 1;
+
+    padding: 13px 16px;
+
+    border: 1px solid #d1d5db;
+
+    border-radius: 12px;
+
+    outline: none;
+
+    font-size: 15px;
+}
+
+#message-input:focus {
+    border-color: #2563eb;
+}
+
+#send-button {
+    padding: 0 23px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    background: #2563eb;
+    color: white;
+
+    font-size: 15px;
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+#send-button:hover {
+    background: #1d4ed8;
+}
+
+#send-button:disabled {
+    background: #94a3b8;
+    cursor: not-allowed;
+}
+
+
+/* =========================
+   MOBILE
+   ========================= */
+
+@media (max-width: 600px) {
+
+    body {
+        background: white;
+    }
+
+    .app {
+        height: 100vh;
+        border-radius: 0;
+    }
+
+    .chat-header {
+        padding: 16px;
+    }
+
+    .chat-box {
+        padding: 16px;
+    }
+
+    .message {
+        max-width: 90%;
+    }
+
+    .input-area {
+        padding: 12px;
+    }
+
+    #send-button {
+        padding: 0 16px;
+    }
+}

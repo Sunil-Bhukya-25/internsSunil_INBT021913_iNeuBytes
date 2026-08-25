@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Virtual environment
+venv/
+.venv/
+env/
+
+# Large trained model artifacts
+models/
+03_models/
+08_final/
+
+# Final submission package
+FINAL_SUBMISSION/
+*.zip
+
+# Local environment / secrets
+.env
+.env.*
+*.pem
+*.key
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

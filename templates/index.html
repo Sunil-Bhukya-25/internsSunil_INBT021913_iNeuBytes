@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Personalized Chatbot</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <div class="app">
+
+        <!-- Header -->
+        <header class="chat-header">
+
+            <div class="bot-icon">
+                🤖
+            </div>
+
+            <div>
+                <h1>Personalized Chatbot</h1>
+                <p>
+                    <span class="status-dot"></span>
+                    Online • Hybrid AI Assistant
+                </p>
+            </div>
+
+        </header>
+
+
+        <!-- Chat Area -->
+        <main id="chat-box" class="chat-box">
+
+            <div class="message bot-message">
+                <div class="avatar">🤖</div>
+
+                <div class="bubble">
+                    Hello! 👋 I'm your Personalized Chatbot.
+                    Ask me anything and I'll do my best to help you.
+                </div>
+            </div>
+
+        </main>
+
+
+        <!-- Typing Indicator -->
+        <div id="typing-indicator" class="typing hidden">
+            <span></span>
+            <span></span>
+            <span></span>
+            <label>Chatbot is thinking...</label>
+        </div>
+
+
+        <!-- Input Area -->
+        <footer class="input-area">
+
+            <input
+                type="text"
+                id="message-input"
+                placeholder="Type your message..."
+                autocomplete="off"
+            >
+
+            <button id="send-button" type="button">
+                Send
+            </button>
+
+        </footer>
+
+    </div>
+
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+</html>

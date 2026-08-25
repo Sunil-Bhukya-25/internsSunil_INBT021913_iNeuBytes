@@ -1,0 +1,26 @@
+PERSONALIZED CHATBOT — MODEL MANIFEST
+
+Hugging Face repository:
+Sunil-25-10/personalized-chatbot-models
+
+Repository type:
+Dataset
+
+Required files:
+
+1. tfidf_vectorizer.pkl
+2. tfidf_train_matrix.npz
+3. semantic_train_embeddings_fixed.npy
+4. semantic_train_indices_fixed.npy
+5. semantic_train_responses_fixed.json
+6. semantic_embedding_config_fixed.json
+
+Place all six files inside:
+
+models/
+
+The Flask application loads these retrieval artifacts during startup.
+
+Note:
+The original project also contains other experimental/model artifacts.
+Only the six files above are required by the final deployment configuration.
